@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Rendering;
@@ -17,6 +18,11 @@ public class PlayerController : MonoBehaviour
 
     [Header("物理")]
     private Rigidbody2D rb;//获取刚体
+
+
+
+
+
     
 
 
@@ -32,7 +38,7 @@ public class PlayerController : MonoBehaviour
 
 
 
-
+       
 
 
 
@@ -40,7 +46,9 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    
 
+    //开火函数
 
 
     private void OnEnable()
