@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class Weapon : MonoBehaviour
 {
-    public InputSystem fireController;
+    
     public Transform firePoint;//开火点
     public Camera camara;//相机
     public Transform player;//获取玩家
@@ -16,17 +16,14 @@ public class Weapon : MonoBehaviour
 
     public void Awake()
     {
-        fireController = new InputSystem();
+       
         camara = Camera.main;
 
 
-        fireController.GamePlay.Fire.started += FIre;
+        
     }
 
-    private void FIre(UnityEngine.InputSystem.InputAction.CallbackContext context)
-    {
-        Debug.Log("fire");
-    }
+    
 
     public void Start()
     {
