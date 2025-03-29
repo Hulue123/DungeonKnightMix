@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -19,10 +20,10 @@ public class PlayerController : MonoBehaviour
     [Header("物理")]
     private Rigidbody2D rb;//获取刚体
 
+    public GameObject weapon;//所获得的武器
 
-
-
-
+    public Weapon weaponScript;
+    
     
 
 
@@ -35,10 +36,11 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         parameter = GetComponent<Parameter>();
         rb = GetComponent<Rigidbody2D>();
+        weaponScript = weapon.GetComponent<Weapon>();
 
+        inputControl.GamePlay.Fire.started += FireStart;
+        inputControl.GamePlay.Fire.canceled += FireCancle;
 
-
-       
 
 
 
@@ -46,7 +48,23 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    
+    private void FireCancle(InputAction.CallbackContext context)
+    {
+        weaponScript.isfire = false;
+    }
+
+    private void FireStart(InputAction.CallbackContext context)
+    {
+        weaponScript.isfire = true;
+    }
+
+
+
+
+
+
+
+
 
     //开火函数
 

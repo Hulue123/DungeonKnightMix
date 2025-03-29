@@ -6,19 +6,22 @@ public class Parameter : MonoBehaviour
 {
 
     [Header("基本属性")]
-    public int health;
+    public int maxHealth;
+    public int currentHelath;
     public int shield;
     public float speed;
 
     [Header("基本状态")]
     public bool isMove;
-    public bool ishurt;
+    public bool isHurt;
+    public bool isDead;
 
 
     private void Awake()
     {
         isMove = false;
-        ishurt = false;
+        isHurt = false;
+        currentHelath = maxHealth;
     }
 
 
@@ -29,7 +32,19 @@ public class Parameter : MonoBehaviour
 
 
 
-
+    public void TakeDamage(int damage)
+    {
+        if (currentHelath - damage >= 0)
+        {
+            currentHelath -= damage;
+        }
+        else
+        {
+            currentHelath = 0;
+            isDead = true;
+            Destroy(gameObject);
+        }
+    }
 
 
 

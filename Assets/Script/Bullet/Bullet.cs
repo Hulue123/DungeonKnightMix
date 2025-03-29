@@ -4,25 +4,62 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public int power;
+    public int damage;
+    public float speed;
+
+    private Rigidbody2D rb;
+   
 
 
 
-    public void FixedUpdate()
+    private void Awake()
     {
-        Move();
+        rb = GetComponent<Rigidbody2D>();
+
+    }
+
+    private void Start()
+    {
+        rb.velocity = transform.right * speed;
+
     }
 
 
 
 
-
-
-
-
-    private void Move()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        transform.position = Vector3.forward;
+        Debug.Log(other);
+        if(other.gameObject.CompareTag("Enemy"))
+        {
+            other.GetComponent<Parameter>().TakeDamage(damage);
+            Destroy(this.gameObject);
+
+        }
+
+        if (other.gameObject.CompareTag("Wall"))
+        {
+            Debug.Log("attack");
+            Destroy(this.gameObject);
+        }
+
+
+
 
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
