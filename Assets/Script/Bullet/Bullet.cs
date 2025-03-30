@@ -29,7 +29,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(other);
+        
         if(other.gameObject.CompareTag("Enemy"))
         {
             other.GetComponent<Parameter>().TakeDamage(damage);
@@ -39,7 +39,7 @@ public class Bullet : MonoBehaviour
 
         if (other.gameObject.CompareTag("Wall"))
         {
-            Debug.Log("attack");
+            
             Destroy(this.gameObject);
         }
 

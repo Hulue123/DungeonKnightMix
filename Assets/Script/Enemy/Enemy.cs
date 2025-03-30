@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -32,7 +33,7 @@ public class Enemy : MonoBehaviour
         Chase();
     }
 
-    private void Update()
+    protected virtual void  Update()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         targetTransform = player.transform;

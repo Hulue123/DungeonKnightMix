@@ -36,13 +36,23 @@ public class Parameter : MonoBehaviour
     {
         if (currentHelath - damage >= 0)
         {
+            
             currentHelath -= damage;
+            if (this.gameObject.CompareTag("Enemy"))
+            {
+                AudioManager.PlayJunBiao6();
+            }
+            
         }
         else
         {
             currentHelath = 0;
             isDead = true;
             Destroy(gameObject);
+            if (this.gameObject.CompareTag("Enemy"))
+            {
+                AudioManager.PlayJunBiaoIsDead();
+            }
         }
     }
 
