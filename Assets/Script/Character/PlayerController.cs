@@ -20,9 +20,13 @@ public class PlayerController : MonoBehaviour
     [Header("物理")]
     private Rigidbody2D rb;//获取刚体
 
-    public GameObject weapon;//所获得的武器
+    [Header("武器系统")]
+    public GameObject weaponGameObjectIsGot;//所获得的武器
+    public GameObject weaponGameObjectCanBeGot;
+    public Weapon weaponIsGot;
+    
 
-    public Weapon weaponScript;
+
     
     
 
@@ -36,26 +40,49 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         parameter = GetComponent<Parameter>();
         rb = GetComponent<Rigidbody2D>();
-        weaponScript = weapon.GetComponent<Weapon>();
+        
 
         inputControl.GamePlay.Fire.started += FireStart;
         inputControl.GamePlay.Fire.canceled += FireCancle;
+        inputControl.GamePlay.GetWeapon.started += GetWeapon;
 
 
 
 
 
+    }
 
+    private void GetWeapon(InputAction.CallbackContext context)
+    {
+        Debug.Log("Get!");
+        if (weaponGameObjectCanBeGot != null)
+        {
+            if (weaponGameObjectIsGot != null)
+            {
+                weaponIsGot = weaponGameObjectIsGot.GetComponent<Weapon>();
+                weaponIsGot.enabled = false;
+                
+            }
+            weaponGameObjectIsGot = weaponGameObjectCanBeGot;
+            weaponIsGot=weaponGameObjectIsGot.GetComponent<Weapon>();
+            weaponIsGot.enabled = true;
+        }
     }
 
     private void FireCancle(InputAction.CallbackContext context)
     {
-        weaponScript.isfire = false;
+        if (weaponIsGot != null)
+        {
+            weaponIsGot.isfire = false;
+        }
     }
 
     private void FireStart(InputAction.CallbackContext context)
     {
-        weaponScript.isfire = true;
+        if (weaponIsGot != null)
+        {
+            weaponIsGot.isfire = true;
+        }
     }
 
 
@@ -149,10 +176,23 @@ public class PlayerController : MonoBehaviour
 
 
 
+    private void OnTriggerEnter2D(Collider2D other )
+    {
+        Debug.Log("Trigger!");
+        if (other.gameObject.CompareTag("Weapon"))
+        {
+            weaponGameObjectCanBeGot = other.gameObject;
+        }
+    }
 
 
-
-
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Weapon"))
+        {
+            weaponGameObjectCanBeGot = null;
+        }
+    }
 
 
 

@@ -16,13 +16,15 @@ public class Weapon : MonoBehaviour
     public float fireTimer;
     public float fireTime;
 
+   
+
 
     public void Awake()
     {
        
         camara = Camera.main;
         fireTimer = fireTime;
-
+    
         
     }
 
