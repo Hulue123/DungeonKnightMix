@@ -10,6 +10,7 @@ public class Weapon : MonoBehaviour
     public Transform firePoint;//开火点
     public Camera camara;//相机
     public Transform player;//获取玩家
+    public GameObject playerpoint;
     public Vector3 offSet;
     public Transform bullet;
     public bool isfire;
@@ -32,7 +33,8 @@ public class Weapon : MonoBehaviour
 
     public void Start()
     {
-        
+        playerpoint = GameObject.Find("WeaponPoint");
+        player = playerpoint.transform;
     }
 
     
