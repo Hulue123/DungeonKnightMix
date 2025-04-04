@@ -4378,7 +4378,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldenDeagle
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1104822413333329810, guid: f88e045ad43db3140a3f47a9c715a207, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -4615,6 +4616,63 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1001 &1700004987
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7999309009477372622, guid: a4bf33fcbf3d37f4790e636afc420e38, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11.892877
+      objectReference: {fileID: 0}
+    - target: {fileID: 7999309009477372622, guid: a4bf33fcbf3d37f4790e636afc420e38, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.23423
+      objectReference: {fileID: 0}
+    - target: {fileID: 7999309009477372622, guid: a4bf33fcbf3d37f4790e636afc420e38, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7999309009477372622, guid: a4bf33fcbf3d37f4790e636afc420e38, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7999309009477372622, guid: a4bf33fcbf3d37f4790e636afc420e38, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7999309009477372622, guid: a4bf33fcbf3d37f4790e636afc420e38, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7999309009477372622, guid: a4bf33fcbf3d37f4790e636afc420e38, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7999309009477372622, guid: a4bf33fcbf3d37f4790e636afc420e38, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7999309009477372622, guid: a4bf33fcbf3d37f4790e636afc420e38, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7999309009477372622, guid: a4bf33fcbf3d37f4790e636afc420e38, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8085849144256319206, guid: a4bf33fcbf3d37f4790e636afc420e38, type: 3}
+      propertyPath: m_Name
+      value: "\u519B\u6807"
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a4bf33fcbf3d37f4790e636afc420e38, type: 3}
 --- !u!1 &1739774682
 GameObject:
   m_ObjectHideFlags: 0
@@ -5087,4 +5145,8 @@ SceneRoots:
   - {fileID: 613828859}
   - {fileID: 1447169411}
   - {fileID: 178727385}
+<<<<<<< Updated upstream
   - {fileID: 105347429}
+=======
+  - {fileID: 1700004987}
+>>>>>>> Stashed changes
