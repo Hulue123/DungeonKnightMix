@@ -21,6 +21,9 @@ public class TilemapDungeonGenerator : MonoBehaviour
     public int roomSize = 3; // 每个房间的大小(3x3)
     public int startPos = 0;
 
+    [Header("Tile Assets")]
+    public DungeonTileRule[] groundTiles; 
+
     private List<Cell> board;
 
     private class Cell
@@ -160,59 +163,53 @@ public class TilemapDungeonGenerator : MonoBehaviour
     void GenerateWallsAndDoors(Vector3Int origin, Cell cell)
     {
         // 上墙壁/门
-        for (int x = 0; x <= roomSize ; x++)
+        GenerateWallSection(origin, cell.status[0], Direction.Up);
+        // 下墙壁/门
+        GenerateWallSection(origin, cell.status[1], Direction.Down);
+        // 右墙壁/门
+        GenerateWallSection(origin, cell.status[2], Direction.Right);
+        // 左墙壁/门
+        GenerateWallSection(origin, cell.status[3], Direction.Left);
+    }
+
+    enum Direction { Up, Down, Right, Left }
+
+    void GenerateWallSection(Vector3Int origin, bool hasDoor, Direction direction)
+    {
+        int doorCenter = roomSize / 2; // 门居中
+
+        for (int i = 0; i <= roomSize; i++)
         {
-            Vector3Int wallPos = origin + new Vector3Int(x, 1, 0);
-            if (cell.status[0]) { // 有上门
-                if (x == 6 || x == 7 || x == 8)
-                    doorTilemap.SetTile(wallPos, doorTile);
-                else
-                    wallTilemap.SetTile(wallPos, wallTile);
+            Vector3Int wallPos = GetWallPosition(origin, i, direction);
+
+            // 如果有门且是中间位置，则放置门
+            if (hasDoor && Mathf.Abs(i - doorCenter) <= 1)
+            {
+                doorTilemap.SetTile(wallPos, doorTile);
             }
             else
+            {
                 wallTilemap.SetTile(wallPos, wallTile);
-        }
-
-        // 下墙壁/门
-        for (int x = 0; x <= roomSize ; x++)
-        {
-            Vector3Int wallPos = origin + new Vector3Int(x, -roomSize, 0);
-            if (cell.status[1]) // 有下门
-                if (x == 6 || x == 7 || x == 8)
-                    doorTilemap.SetTile(wallPos, doorTile);
-                else
-                    wallTilemap.SetTile(wallPos, wallTile);
-            else
-                wallTilemap.SetTile(wallPos, wallTile);
-        }
-
-        // 右墙壁/门
-        for (int y = 0; y <= roomSize ; y++)
-        {
-            Vector3Int wallPos = origin + new Vector3Int(roomSize, -y, 0);
-            if (cell.status[2]) // 有右门
-                if (y == 6 || y == 7 || y == 8)
-                    doorTilemap.SetTile(wallPos, doorTile);
-                else
-                    wallTilemap.SetTile(wallPos, wallTile);
-            else
-                wallTilemap.SetTile(wallPos, wallTile);
-        }
-
-        // 左墙壁/门
-        for (int y = 0; y <= roomSize ; y++)
-        {
-            Vector3Int wallPos = origin + new Vector3Int(-1, -y, 0);
-            if (cell.status[3]) // 有左门
-                if (y == 6 || y == 7 || y == 8)
-                    doorTilemap.SetTile(wallPos, doorTile);
-                else
-                    wallTilemap.SetTile(wallPos, wallTile);
-            else
-                wallTilemap.SetTile(wallPos, wallTile);
+            }
         }
     }
 
+    Vector3Int GetWallPosition(Vector3Int origin, int index, Direction direction)
+    {
+        switch (direction)
+        {
+            case Direction.Up:
+                return origin + new Vector3Int(index, 1, 0);
+            case Direction.Down:
+                return origin + new Vector3Int(index, -roomSize, 0);
+            case Direction.Right:
+                return origin + new Vector3Int(roomSize, -index, 0);
+            case Direction.Left:
+                return origin + new Vector3Int(-1, -index, 0);
+            default:
+                return origin;
+        }
+    }
     void FillRoomWithWalls(Vector3Int origin)
     {
         for (int x = -1; x <= roomSize; x++)

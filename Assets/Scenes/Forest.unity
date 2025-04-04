@@ -611,13 +611,14 @@ MonoBehaviour:
   groundTilemap: {fileID: 1230394555}
   wallTilemap: {fileID: 34982722}
   doorTilemap: {fileID: 115822061}
-  wallTile: {fileID: 11400000, guid: 6bfaee7c20eacd64da7540545c7495ee, type: 2}
+  wallTile: {fileID: 11400000, guid: 8b6bd64773a803146b1b544962601a55, type: 2}
   doorTile: {fileID: 11400000, guid: fe43930404b391e4ebdf90f935d78e9e, type: 2}
   floorTile: {fileID: 11400000, guid: 6926794f670b37d458b733e0797dfef4, type: 2}
   defaultGroundTile: {fileID: 0}
   size: {x: 4, y: 4}
   roomSize: 15
   startPos: 0
+  groundTiles: []
 --- !u!4 &105347429
 Transform:
   m_ObjectHideFlags: 0
