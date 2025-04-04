@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Dash : MonoBehaviour
 {
@@ -13,18 +14,27 @@ public class Dash : MonoBehaviour
     private Vector2 dashDirection;
     [SerializeField] private float dashSpeed;
     public bool isDashing;
+    [Header("冷却条")]
+    private Transform coolDownBar;
+    public Transform coolDownBarPrefab;
     void Awake()
     {
+        coolDownBar = Instantiate(coolDownBarPrefab);
+        coolDownBar.position = new Vector2(transform.position.x, transform.position.y + 0.85f);
+        coolDownBar.GetComponent<DashCoolDown>().dash = this;
+        coolDownBar.SetParent(transform);
+        coolDownBar.gameObject.SetActive(false);
         rb = GetComponent<Rigidbody2D>();
     }
     public bool CanDash(){
-        return (Time.time >= (lastDash + dashCoolDown));
+        return Time.time >= (lastDash + dashCoolDown);
     }
     public void ReadyToDash(Vector2 direction){
         isDashing = true;
         dashTimeLeft = dashTime;
         lastDash = Time.time;
         dashDirection = direction;
+        coolDownBar.gameObject.SetActive(true);
     }
 
     public void Dashing(){
@@ -36,9 +46,13 @@ public class Dash : MonoBehaviour
                 var shadow = ShadowPool.instance.shadowPool.Get();
                 shadow.GetComponent<ShadowSprite>().Initialization(transform);
             }else{
+                
                 isDashing = false;
             }     
         }
+    }
+    public float GetCoolDownState(){
+        return 1 - (Time.time - lastDash) / dashCoolDown;
     }
     void FixedUpdate()
     {
