@@ -615,8 +615,8 @@ MonoBehaviour:
   doorTile: {fileID: 11400000, guid: fe43930404b391e4ebdf90f935d78e9e, type: 2}
   floorTile: {fileID: 11400000, guid: 6926794f670b37d458b733e0797dfef4, type: 2}
   defaultGroundTile: {fileID: 0}
-  size: {x: 3, y: 3}
-  roomSize: 10
+  size: {x: 4, y: 4}
+  roomSize: 15
   startPos: 0
 --- !u!4 &105347429
 Transform:
