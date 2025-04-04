@@ -8,6 +8,8 @@ TagManager:
   - Wall
   - Enemy
   - Weapon
+  - Door
+  - Floor
   layers:
   - Default
   - TransparentFX
@@ -21,8 +23,8 @@ TagManager:
   - Enemy
   - Weapon
   - WeaponIsGot
-  - 
-  - 
+  - Floor
+  - Door
   - 
   - 
   - 
