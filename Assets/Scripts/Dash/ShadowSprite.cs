@@ -6,9 +6,6 @@ using UnityEngine.Pool;
 public class ShadowSprite : MonoBehaviour
 {
     private bool isInitialaized;
-    public ObjectPool<GameObject> shadowPool;
-    //private Transform player;
-
     private SpriteRenderer thisSprite;
     private SpriteRenderer playerSprite;
 
@@ -48,7 +45,7 @@ public class ShadowSprite : MonoBehaviour
             thisSprite.color = color;
             if(Time.time >= activeStart + activeTime){
                 //返回对象池
-                
+                ShadowPool.instance.shadowPool.Release(gameObject);
             }
         }
     }

@@ -7,11 +7,13 @@ using UnityEngine.Pool;
 
 public class ShadowPool : MonoBehaviour
 {
+    public static ShadowPool instance;
     public GameObject shadowPrefab;
-    private ObjectPool<GameObject> shadowPool;
+    public ObjectPool<GameObject> shadowPool;
 
     void Awake()
     {
+        instance = this;
         shadowPool = new ObjectPool<GameObject>(createFunc, actionOnGet, actionOnRelease, actionOnDestroy, true, 10, 1000);
     }
 
@@ -33,7 +35,6 @@ public class ShadowPool : MonoBehaviour
     private GameObject createFunc()
     {
         var obj = Instantiate(shadowPrefab);
-        obj.GetComponent<ShadowSprite>().shadowPool = shadowPool;
         return obj;
     }
 }

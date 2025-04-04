@@ -2347,6 +2347,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 103410495}
+  - component: {fileID: 103410496}
   m_Layer: 0
   m_Name: ShadowPool
   m_TagString: Untagged
@@ -2369,6 +2370,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &103410496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103410494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f82ecf48da9b4d940848b431a2421850, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowPrefab: {fileID: 4959634939668502082, guid: 2024b55fcc008b64cbb8cda85b34a61f, type: 3}
 --- !u!1 &186677720
 GameObject:
   m_ObjectHideFlags: 0

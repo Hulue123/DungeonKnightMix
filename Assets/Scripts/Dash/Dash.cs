@@ -33,6 +33,8 @@ public class Dash : MonoBehaviour
                 Debug.Log(dashDirection);
                 rb.velocity = dashDirection * dashSpeed;
                 dashTimeLeft -= Time.deltaTime;
+                var shadow = ShadowPool.instance.shadowPool.Get();
+                shadow.GetComponent<ShadowSprite>().Initialization(transform);
             }else{
                 isDashing = false;
             }     
