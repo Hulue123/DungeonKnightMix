@@ -194,7 +194,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6594008538450980847}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5945923d7a9f32742a96427b0106452b, type: 3}
   m_Name: 
@@ -206,4 +206,4 @@ MonoBehaviour:
   offSet: {x: 0, y: 0, z: 0}
   bullet: {fileID: 2544538105245594690, guid: 0c8e97f04f7e6f94bb703fb50a50224f, type: 3}
   isfire: 0
-  fireTime: 0
+  fireTime: 0.5
