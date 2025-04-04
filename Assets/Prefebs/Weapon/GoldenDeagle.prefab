@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 5332726385198887432}
   - component: {fileID: 2282870899692714521}
   m_Layer: 10
-  m_Name: HuangJingShaYing
+  m_Name: GoldenDeagle
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

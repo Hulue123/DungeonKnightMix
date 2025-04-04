@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public Transform shadowPrefab;
     [Header("输入")]
     private InputSystem inputControl;//获取输入系统
     public Vector2 inputDirection;//获取坐标输入
@@ -78,7 +79,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void FireStart(InputAction.CallbackContext context)
-    {
+    { 
         if (weaponIsGot != null)
         {
             weaponIsGot.isfire = true;
@@ -112,7 +113,8 @@ public class PlayerController : MonoBehaviour
 
         //读取输入 
         inputDirection = inputControl.GamePlay.Move.ReadValue<Vector2>();
-
+        // var shadow = Instantiate(shadowPrefab);
+        // shadow.GetComponent<ShadowSprite>().Initialization(GetComponent<Transform>());
 
 
 
