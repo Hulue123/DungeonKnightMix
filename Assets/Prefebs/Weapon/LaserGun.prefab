@@ -5159,6 +5159,7 @@ MonoBehaviour:
   offSet: {x: 0, y: 0, z: 0}
   bullet: {fileID: 0}
   isfire: 0
+  damage: 1
   effect: {fileID: 3207071923600001273}
   layer:
     serializedVersion: 2
