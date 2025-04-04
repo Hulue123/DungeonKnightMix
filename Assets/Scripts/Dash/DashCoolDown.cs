@@ -14,7 +14,7 @@ public class DashCoolDown : MonoBehaviour
             gameObject.SetActive(false);
         }else{
             coolDown.localScale = new(temp, 1);
-            coolDown.position = new(transform.position.x - (1 - temp)/2,transform.position.y + 0);
+            coolDown.position = new(transform.position.x - 1.4f*(1 - temp)/2,transform.position.y + 0);
         }
         
     }
