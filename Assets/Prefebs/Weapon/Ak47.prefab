@@ -41,9 +41,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6228360690130522718}
   - component: {fileID: 9207604864124298034}
-  - component: {fileID: 3216855474520086698}
   - component: {fileID: 7841637419383810356}
   - component: {fileID: 3453364049077436945}
+  - component: {fileID: 7491381805384931025}
   m_Layer: 10
   m_Name: Ak47
   m_TagString: Weapon
@@ -119,26 +119,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3216855474520086698
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9010820547486042301}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 538b94cea3a446943976fc0942d8e4a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firePoint: {fileID: 613918251762931054}
-  camara: {fileID: 0}
-  player: {fileID: 0}
-  offSet: {x: 0, y: 0, z: 0}
-  bullet: {fileID: 8651343836995582585, guid: 708e64fda9156ea45a6ff8b25e83cac1, type: 3}
-  isfire: 0
-  fireTimer: 0
-  fireTime: 0.5
 --- !u!61 &7841637419383810356
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -211,3 +191,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &7491381805384931025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9010820547486042301}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5945923d7a9f32742a96427b0106452b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firePoint: {fileID: 613918251762931054}
+  camara: {fileID: 0}
+  player: {fileID: 0}
+  playerpoint: {fileID: 0}
+  offSet: {x: 0, y: 0, z: 0}
+  bullet: {fileID: 8651343836995582585, guid: 708e64fda9156ea45a6ff8b25e83cac1, type: 3}
+  isfire: 0
+  fireTime: 0.1

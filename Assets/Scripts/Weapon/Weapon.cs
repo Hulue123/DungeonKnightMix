@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Weapon : MonoBehaviour
+public abstract class Weapon : MonoBehaviour
 {
     
     public Transform firePoint;//开火点
@@ -14,19 +14,15 @@ public class Weapon : MonoBehaviour
     public Vector3 offSet;
     public Transform bullet;
     public bool isfire;
-    public float fireTimer;
-    public float fireTime;
+
 
    
 
 
-    public void Awake()
+    public virtual void Awake()
     {
        
         camara = Camera.main;
-        fireTimer = fireTime;
-    
-        
     }
 
     
@@ -40,25 +36,8 @@ public class Weapon : MonoBehaviour
     
     
 
-    public void Update()
+    public virtual void Update()
     {
-        fireTimer -= Time.deltaTime;
-
-
-        if (fireTimer < 0 && isfire)
-        {
-            Fire();
-            fireTimer = fireTime;
-        }
-
-
-
-
-
-
-
-
-
     }
 
 
@@ -92,11 +71,8 @@ public class Weapon : MonoBehaviour
         transform.position = player.transform.position+offSet;
     }
 
-    public void Fire()
-    {
-        Vector2 diffenrence = camara.ScreenToWorldPoint(Input.mousePosition) - player.transform.position;//鼠标方向
-        float rotZ = Mathf.Atan2(diffenrence.y, diffenrence.x) * Mathf.Rad2Deg;//将弧度转化为角度
-        Instantiate(bullet, firePoint.transform.position, Quaternion.Euler(0, 0, rotZ));
+    public virtual void Fire()
+    {  
     }
 
 

@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7092675826929222448}
+  - component: {fileID: 1104822413333329810}
   m_Layer: 10
   m_Name: FirePoint
   m_TagString: Untagged
@@ -31,6 +32,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5204078755801583017}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1104822413333329810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3690436505999443375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4ff5032600675546b86729906848586, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firePoint: {fileID: 0}
+  camara: {fileID: 0}
+  player: {fileID: 0}
+  playerpoint: {fileID: 0}
+  offSet: {x: 0, y: 0, z: 0}
+  bullet: {fileID: 0}
+  isfire: 0
+  effect: {fileID: 0}
+  layer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &6594008538450980847
 GameObject:
   m_ObjectHideFlags: 0
@@ -41,8 +65,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5204078755801583017}
   - component: {fileID: 1839303270206909532}
-  - component: {fileID: 5332726385198887432}
   - component: {fileID: 2282870899692714521}
+  - component: {fileID: 2161409137900930686}
   m_Layer: 10
   m_Name: GoldenDeagle
   m_TagString: Weapon
@@ -118,26 +142,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5332726385198887432
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6594008538450980847}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 538b94cea3a446943976fc0942d8e4a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firePoint: {fileID: 7092675826929222448}
-  camara: {fileID: 0}
-  player: {fileID: 0}
-  offSet: {x: 0, y: 0, z: 0}
-  bullet: {fileID: 2544538105245594690, guid: 0c8e97f04f7e6f94bb703fb50a50224f, type: 3}
-  isfire: 0
-  fireTimer: 0
-  fireTime: 1
 --- !u!61 &2282870899692714521
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -183,3 +187,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9375, y: 0.5625}
   m_EdgeRadius: 0
+--- !u!114 &2161409137900930686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6594008538450980847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5945923d7a9f32742a96427b0106452b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firePoint: {fileID: 7092675826929222448}
+  camara: {fileID: 0}
+  player: {fileID: 0}
+  playerpoint: {fileID: 0}
+  offSet: {x: 0, y: 0, z: 0}
+  bullet: {fileID: 2544538105245594690, guid: 0c8e97f04f7e6f94bb703fb50a50224f, type: 3}
+  isfire: 0
+  fireTime: 0
