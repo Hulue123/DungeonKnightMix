@@ -40,7 +40,7 @@ public class Dash : MonoBehaviour
     public void Dashing(){
         if(isDashing){
             if(dashTimeLeft > 0){
-                Debug.Log(dashDirection);
+                
                 rb.velocity = dashDirection * dashSpeed;
                 dashTimeLeft -= Time.deltaTime;
                 var shadow = ShadowPool.instance.shadowPool.Get();
@@ -54,7 +54,7 @@ public class Dash : MonoBehaviour
     public float GetCoolDownState(){
         return 1 - (Time.time - lastDash) / dashCoolDown;
     }
-    void FixedUpdate()
+    void Update()
     {
         Dashing();
     }
