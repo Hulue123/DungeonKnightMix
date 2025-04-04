@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LaserGun : Weapon
 {
+    [SerializeField] private int damage;
     private Animator animator;
     public GameObject effect;
     private LineRenderer laser;
@@ -23,6 +24,7 @@ public class LaserGun : Weapon
 
         laser.SetPosition(0, firePoint.position);
         laser.SetPosition(1, hit2D.point);
+        hit2D.collider?.gameObject.GetComponent<Parameter>()?.TakeDamage(damage);
 
         effect.transform.position = hit2D.point;
         effect.transform.forward = -direction;
