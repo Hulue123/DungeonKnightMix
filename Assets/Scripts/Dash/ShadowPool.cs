@@ -35,6 +35,7 @@ public class ShadowPool : MonoBehaviour
     private GameObject createFunc()
     {
         var obj = Instantiate(shadowPrefab);
+        obj.transform.SetParent(transform);
         return obj;
     }
 }
