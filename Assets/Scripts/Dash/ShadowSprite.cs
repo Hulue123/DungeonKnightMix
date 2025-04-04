@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class ShadowSprite : MonoBehaviour
 {
     private bool isInitialaized;
+    public ObjectPool<GameObject> shadowPool;
     //private Transform player;
 
     private SpriteRenderer thisSprite;
@@ -46,7 +48,7 @@ public class ShadowSprite : MonoBehaviour
             thisSprite.color = color;
             if(Time.time >= activeStart + activeTime){
                 //返回对象池
-                Destroy(gameObject);
+                
             }
         }
     }

@@ -62,6 +62,15 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""88e643a5-0b02-46f1-9c21-fd861dd5f6b4"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -304,6 +313,17 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""GetWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2957055b-a124-46a3-a47b-3e9cef1356cc"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -895,6 +915,7 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
         m_GamePlay_Look = m_GamePlay.FindAction("Look", throwIfNotFound: true);
         m_GamePlay_Fire = m_GamePlay.FindAction("Fire", throwIfNotFound: true);
         m_GamePlay_GetWeapon = m_GamePlay.FindAction("GetWeapon", throwIfNotFound: true);
+        m_GamePlay_Dash = m_GamePlay.FindAction("Dash", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -978,6 +999,7 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
     private readonly InputAction m_GamePlay_Look;
     private readonly InputAction m_GamePlay_Fire;
     private readonly InputAction m_GamePlay_GetWeapon;
+    private readonly InputAction m_GamePlay_Dash;
     public struct GamePlayActions
     {
         private @InputSystem m_Wrapper;
@@ -986,6 +1008,7 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_GamePlay_Look;
         public InputAction @Fire => m_Wrapper.m_GamePlay_Fire;
         public InputAction @GetWeapon => m_Wrapper.m_GamePlay_GetWeapon;
+        public InputAction @Dash => m_Wrapper.m_GamePlay_Dash;
         public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1007,6 +1030,9 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
             @GetWeapon.started += instance.OnGetWeapon;
             @GetWeapon.performed += instance.OnGetWeapon;
             @GetWeapon.canceled += instance.OnGetWeapon;
+            @Dash.started += instance.OnDash;
+            @Dash.performed += instance.OnDash;
+            @Dash.canceled += instance.OnDash;
         }
 
         private void UnregisterCallbacks(IGamePlayActions instance)
@@ -1023,6 +1049,9 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
             @GetWeapon.started -= instance.OnGetWeapon;
             @GetWeapon.performed -= instance.OnGetWeapon;
             @GetWeapon.canceled -= instance.OnGetWeapon;
+            @Dash.started -= instance.OnDash;
+            @Dash.performed -= instance.OnDash;
+            @Dash.canceled -= instance.OnDash;
         }
 
         public void RemoveCallbacks(IGamePlayActions instance)
@@ -1209,6 +1238,7 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnGetWeapon(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

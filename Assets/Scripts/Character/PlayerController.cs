@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Messaging;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    private Dash dash;
     public Transform shadowPrefab;
     [Header("输入")]
     private InputSystem inputControl;//获取输入系统
@@ -25,7 +27,6 @@ public class PlayerController : MonoBehaviour
     public GameObject weaponGameObjectIsGot;//所获得的武器
     public GameObject weaponGameObjectCanBeGot;
     public Weapon weaponIsGot;
-    
 
 
     
@@ -41,16 +42,25 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         parameter = GetComponent<Parameter>();
         rb = GetComponent<Rigidbody2D>();
+        dash = GetComponent<Dash>();
         
 
         inputControl.GamePlay.Fire.started += FireStart;
         inputControl.GamePlay.Fire.canceled += FireCancle;
         inputControl.GamePlay.GetWeapon.started += GetWeapon;
+        inputControl.GamePlay.Dash.started += TryToDash;
 
 
 
 
 
+    }
+
+    private void TryToDash(InputAction.CallbackContext context)
+    {
+        if(dash.CanDash()){
+            dash.ReadyToDash(inputDirection);
+        }
     }
 
     private void GetWeapon(InputAction.CallbackContext context)
@@ -128,6 +138,9 @@ public class PlayerController : MonoBehaviour
 
     public void FixedUpdate()
     {
+        if(dash.isDashing){
+            return;
+        }
         //移动
         Move();
         Face();
