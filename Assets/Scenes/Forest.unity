@@ -614,11 +614,13 @@ MonoBehaviour:
   wallTile: {fileID: 11400000, guid: 8b6bd64773a803146b1b544962601a55, type: 2}
   doorTile: {fileID: 11400000, guid: fe43930404b391e4ebdf90f935d78e9e, type: 2}
   floorTile: {fileID: 11400000, guid: 6926794f670b37d458b733e0797dfef4, type: 2}
-  defaultGroundTile: {fileID: 0}
   size: {x: 4, y: 4}
   roomSize: 15
   startPos: 0
-  groundTiles: []
+  enemyPrefab: {fileID: 8085849144256319206, guid: a4bf33fcbf3d37f4790e636afc420e38, type: 3}
+  minEnemiesPerRoom: 1
+  maxEnemiesPerRoom: 3
+  enemyContainer: {fileID: 1452971083}
 --- !u!4 &105347429
 Transform:
   m_ObjectHideFlags: 0
@@ -4385,6 +4387,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f88e045ad43db3140a3f47a9c715a207, type: 3}
+--- !u!1 &1452971082
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1452971083}
+  m_Layer: 0
+  m_Name: EnemyCantainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1452971083
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452971082}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1494323386
 GameObject:
   m_ObjectHideFlags: 0
@@ -4654,8 +4687,8 @@ Camera:
   m_GameObject: {fileID: 1739774682}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.1792453, g: 0.16994482, b: 0.16994482, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -5090,3 +5123,4 @@ SceneRoots:
   - {fileID: 1447169411}
   - {fileID: 178727385}
   - {fileID: 105347429}
+  - {fileID: 1452971083}
