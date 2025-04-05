@@ -14,15 +14,33 @@ public class TilemapDungeonGenerator : MonoBehaviour
     public TileBase wallTile;
     public TileBase doorTile;
     public TileBase floorTile;
-    public TileBase defaultGroundTile;
+
 
     [Header("Dungeon Settings")]
     public Vector2Int size = new Vector2Int(5, 5); // 房间数量
     public int roomSize = 3; // 每个房间的大小(3x3)
     public int startPos = 0;
 
-    [Header("Tile Assets")]
-    public DungeonTileRule[] groundTiles; 
+    private GameObject player;
+
+
+    [Header("Enemy Settings")]
+    public GameObject enemyPrefab; // 敌人预制体
+    public int minEnemiesPerRoom = 1;
+    public int maxEnemiesPerRoom = 3;
+    public Transform enemyContainer; // 用于组织生成敌人的父物体
+
+    [System.Serializable]
+    public class RoomData
+    {
+        public Vector3Int position;
+        public List<GameObject> enemies;
+        public bool isActive;
+        public List<Vector3Int> doorPositions;
+    }
+
+    private Dictionary<Vector3Int, RoomData> roomDataDict = new Dictionary<Vector3Int, RoomData>();
+    private Vector3Int currentPlayerRoom;
 
     private List<Cell> board;
 
@@ -34,6 +52,7 @@ public class TilemapDungeonGenerator : MonoBehaviour
 
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         GenerateDungeon();
     }
 
@@ -134,15 +153,26 @@ public class TilemapDungeonGenerator : MonoBehaviour
 
                 if (currentCell.visited)
                 {
-                    // 填充房间地板
-                    FillRoomWithFloor(roomOrigin);
+                    // 初始化房间数据
+                    var roomData = new RoomData()
+                    {
+                        position = roomOrigin,
+                        enemies = new List<GameObject>(),
+                        isActive = false,
+                        doorPositions = new List<Vector3Int>()
+                    };
+                    roomDataDict.Add(roomOrigin, roomData);
 
-                    // 生成墙壁和门
+                    FillRoomWithFloor(roomOrigin);
                     GenerateWallsAndDoors(roomOrigin, currentCell);
+
+
+                    // 生成敌人
+                    SpawnEnemies(roomOrigin, roomData);
+
                 }
                 else
                 {
-                    // 填充未访问房间为墙
                     FillRoomWithWalls(roomOrigin);
                 }
             }
@@ -186,6 +216,10 @@ public class TilemapDungeonGenerator : MonoBehaviour
             if (hasDoor && Mathf.Abs(i - doorCenter) <= 1)
             {
                 doorTilemap.SetTile(wallPos, doorTile);
+
+                // 记录所有三个门格位置
+                roomDataDict[origin].doorPositions.Add(wallPos);
+
             }
             else
             {
@@ -244,5 +278,117 @@ public class TilemapDungeonGenerator : MonoBehaviour
             neighbors.Add(cell - 1);
 
         return neighbors;
+    }
+
+    void SpawnEnemies(Vector3Int roomOrigin, RoomData roomData)
+    {
+        if (enemyPrefab == null) return;
+
+        int enemyCount = Random.Range(minEnemiesPerRoom, maxEnemiesPerRoom + 1);
+
+        float padding = 2.0f; // 离墙安全距离
+
+        for (int i = 0; i < enemyCount; i++)
+        {
+            // 在房间内随机位置生成敌人
+            Vector3 spawnPos = roomOrigin + new Vector3(
+                Random.Range(1, roomSize - padding),
+                -Random.Range(1, roomSize - padding),
+                0);
+
+            GameObject enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity, enemyContainer);
+            enemy.SetActive(false); // 初始未激活
+            roomData.enemies.Add(enemy);
+        }
+    }
+
+
+    void CloseDoors(Vector3Int roomPos)
+    {
+        var room = roomDataDict[roomPos];
+        foreach (var doorPos in room.doorPositions)
+        {
+            doorTilemap.SetTile(doorPos, wallTile);
+        }
+    }
+
+    void OpenDoors(Vector3Int roomPos)
+    {
+        var room = roomDataDict[roomPos];
+        foreach (var doorPos in room.doorPositions)
+        {
+            doorTilemap.SetTile(doorPos, doorTile);
+        }
+    }
+    void OnPlayerEnterNewRoom(Vector3Int roomPos)
+    {
+        if (!roomDataDict.ContainsKey(roomPos)) return;
+
+        var room = roomDataDict[roomPos];
+
+        if (!room.isActive && room.enemies.Count > 0)
+        {
+            room.isActive = true;
+            CloseDoors(roomPos); // 改为关闭三格门
+
+            foreach (var enemy in room.enemies)
+            {
+                enemy.SetActive(true);
+            }
+        }
+    }
+
+    void CheckRoomCleared(Vector3Int roomPos)
+    {
+        var room = roomDataDict[roomPos];
+
+        bool allDead = true;
+        foreach (var enemy in room.enemies)
+        {
+            if (enemy != null)
+            {
+                allDead = false;
+                break;
+            }
+        }
+
+        if (allDead)
+        {
+            room.isActive = false;
+            OpenDoors(roomPos); // 改为打开三格门
+        }
+    }
+
+    void Update()
+    {
+        if (roomDataDict.Count == 0) return;
+
+        // 检测玩家当前所在房间
+        Vector3Int playerRoomPos = GetCurrentRoom(PlayerPosition());
+
+        if (playerRoomPos != currentPlayerRoom)
+        {
+            OnPlayerEnterNewRoom(playerRoomPos);
+            currentPlayerRoom = playerRoomPos;
+        }
+
+        // 检查当前房间敌人是否全部被消灭
+        if (roomDataDict.ContainsKey(currentPlayerRoom) &&
+            roomDataDict[currentPlayerRoom].isActive)
+        {
+            CheckRoomCleared(currentPlayerRoom);
+        }
+    }
+
+    Vector3 PlayerPosition()
+    {
+        return GameObject.FindGameObjectWithTag("Player").transform.position;
+    }
+
+    Vector3Int GetCurrentRoom(Vector3 position)
+    {
+        int roomX = Mathf.FloorToInt(position.x / (roomSize + 1));
+        int roomY = Mathf.FloorToInt(-position.y / (roomSize + 1));
+        return new Vector3Int(roomX * (roomSize + 1), -roomY * (roomSize + 1), 0);
     }
 }
